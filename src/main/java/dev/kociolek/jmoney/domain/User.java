@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Entity
 @Data
@@ -46,7 +47,7 @@ public class User {
 		this.id = UUID.randomUUID().toString();
 		this.name = name;
 		this.email = email;
-		this.password = password;
+		this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
 		this.roles = roles;
 	}
 
