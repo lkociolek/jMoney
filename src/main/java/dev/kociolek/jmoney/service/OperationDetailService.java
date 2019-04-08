@@ -11,9 +11,9 @@ import dev.kociolek.jmoney.repository.OperationDetailRepository;
 @Service
 public class OperationDetailService implements IService<OperationDetail> {
 
-	@Autowired
-	OperationDetailRepository repository;
+	private OperationDetailRepository repository;
 
+	@Autowired
 	public OperationDetailService(OperationDetailRepository repository) {
 		this.repository = repository;
 	}
@@ -25,16 +25,7 @@ public class OperationDetailService implements IService<OperationDetail> {
 
 	@Override
 	public OperationDetail update(OperationDetail detail) {
-		OperationDetail detailToUpdate = repository.findById(detail.getId()).get();
-		detailToUpdate.setBeneficiary(detail.getBeneficiary());
-		detailToUpdate.setComment(detail.getComment());
-		detailToUpdate.setDate(detail.getDate());
-		detailToUpdate.setOperationType(detail.getOperationType());
-		detailToUpdate.setOwner(detail.getOwner());
-		detailToUpdate.setPaid(detail.isPaid());
-		detailToUpdate.setTag(detail.getTag());
-		detailToUpdate.setTime(detail.getTime());
-		return repository.save(detailToUpdate);
+		return repository.save(detail);
 	}
 
 	@Override

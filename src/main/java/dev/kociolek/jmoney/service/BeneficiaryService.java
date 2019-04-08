@@ -11,9 +11,9 @@ import dev.kociolek.jmoney.repository.BeneficiaryRepository;
 @Service
 public class BeneficiaryService implements IService<Beneficiary> {
 
+	private BeneficiaryRepository repository;
+
 	@Autowired
-	BeneficiaryRepository repository;
-	
 	public BeneficiaryService(BeneficiaryRepository repository) {
 		this.repository = repository;
 	}
@@ -25,9 +25,7 @@ public class BeneficiaryService implements IService<Beneficiary> {
 
 	@Override
 	public Beneficiary update(Beneficiary beneficiary) {
-		Beneficiary beneficiaryToUpdate = repository.findById(beneficiary.getId()).get();
-		beneficiaryToUpdate.setName(beneficiary.getName());
-		return repository.save(beneficiaryToUpdate);
+		return repository.save(beneficiary);
 	}
 
 	@Override

@@ -11,9 +11,9 @@ import dev.kociolek.jmoney.repository.AccountRepository;
 @Service
 public class AccountService implements IService<Account> {
 
-	@Autowired
-	AccountRepository repository;
+	private AccountRepository repository;
 
+	@Autowired
 	public AccountService(AccountRepository repository) {
 		this.repository = repository;
 	}
@@ -25,10 +25,7 @@ public class AccountService implements IService<Account> {
 
 	@Override
 	public Account update(Account account) {
-		Account accountToUpdate = repository.findById(account.getId()).get();
-		accountToUpdate.setName(account.getName());
-		accountToUpdate.setBalance(account.getBalance());
-		return repository.save(accountToUpdate);
+		return repository.save(account);
 	}
 
 	@Override

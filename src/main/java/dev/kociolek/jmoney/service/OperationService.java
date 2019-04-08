@@ -11,9 +11,9 @@ import dev.kociolek.jmoney.repository.OperationRepository;
 @Service
 public class OperationService implements IService<Operation> {
 
-	@Autowired
-	OperationRepository repository;
+	private OperationRepository repository;
 
+	@Autowired
 	public OperationService(OperationRepository repository) {
 		this.repository = repository;
 	}
@@ -25,10 +25,7 @@ public class OperationService implements IService<Operation> {
 
 	@Override
 	public Operation update(Operation operation) {
-		Operation opertaionToUpdate = repository.findById(operation.getId()).get();
-		opertaionToUpdate.setAccount(operation.getAccount());
-		opertaionToUpdate.setOperationDetails(operation.getOperationDetails());
-		return repository.save(opertaionToUpdate);
+		return repository.save(operation);
 	}
 
 	@Override

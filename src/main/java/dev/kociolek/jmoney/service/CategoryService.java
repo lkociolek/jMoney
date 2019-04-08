@@ -11,9 +11,9 @@ import dev.kociolek.jmoney.repository.CategoryRepository;
 @Service
 public class CategoryService implements IService<Category> {
 
-	@Autowired
-	CategoryRepository repository;
+	private CategoryRepository repository;
 
+	@Autowired
 	public CategoryService(CategoryRepository repository) {
 		this.repository = repository;
 	}
@@ -25,13 +25,7 @@ public class CategoryService implements IService<Category> {
 
 	@Override
 	public Category update(Category category) {
-		Category categoryToUpdate = repository.findById(category.getId()).get();
-		categoryToUpdate.setName(category.getName());
-		categoryToUpdate.setAccount(category.getAccount());
-		categoryToUpdate.setImage(category.getImage());
-		categoryToUpdate.setParentCategory(category.getParentCategory());
-		categoryToUpdate.setType(category.getType());
-		return repository.save(categoryToUpdate);
+		return repository.save(category);
 	}
 
 	@Override

@@ -11,9 +11,9 @@ import dev.kociolek.jmoney.repository.TransactionRepository;
 @Service
 public class TransactionService implements IService<Transaction> {
 
+	private TransactionRepository repository;
+
 	@Autowired
-	TransactionRepository repository;
-	
 	public TransactionService(TransactionRepository repository) {
 		this.repository = repository;
 	}
@@ -25,11 +25,7 @@ public class TransactionService implements IService<Transaction> {
 
 	@Override
 	public Transaction update(Transaction transaction) {
-		Transaction transactionToUpdate = repository.findById(transaction.getId()).get();
-		transactionToUpdate.setAmount(transaction.getAmount());
-		transactionToUpdate.setCategory(transaction.getCategory());
-		transactionToUpdate.setOperation(transaction.getOperation());
-		return repository.save(transactionToUpdate);
+		return repository.save(transaction);
 	}
 
 	@Override
