@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>jMoney - My Home Budget</title>
+</head>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+    <span sec:authorize="hasRole('ADMIN')">Widoczne dla administratora</span>
+    <span sec:authorize="hasRole('USER')">Widoczne dla usera</span>
+</form>
+Roles: <span sec:authentication="authorities"></span>
+
+</body>
+</html>
