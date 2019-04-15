@@ -4,7 +4,6 @@ import dev.kociolek.jmoney.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.access.expression.SecurityExpressionOperations;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,7 +21,6 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@Profile({"thymeleaf", "vaadin"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String ROLE_ADMIN = Role.ADMIN.toString();
     public static final String H2_CONSOLE = "/h2-console/**";
@@ -42,12 +40,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(INDEX)
-                                    .permitAll().anyRequest().authenticated().and()
-            .authorizeRequests().antMatchers(H2_CONSOLE).authenticated().anyRequest().authenticated().and()
-            .formLogin().permitAll().and()
-            .logout().logoutSuccessUrl("/").permitAll().and()
-            .httpBasic().and()
-            .rememberMe().tokenValiditySeconds(2419200);
+                .permitAll().anyRequest().authenticated().and()
+                .authorizeRequests().antMatchers(H2_CONSOLE).authenticated().anyRequest().authenticated().and()
+                .formLogin().permitAll().and()
+                .logout().logoutSuccessUrl("/").permitAll().and()
+                .httpBasic().and()
+                .rememberMe().tokenValiditySeconds(2419200);
     }
 
     @Override
